@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# RENPY_VER: version del SDK de Ren'Py. DEBE coincidir con
+# assets/x-game/x-script_version.txt del juego. Ej: 8.5.2
+RENPY_VER="${RENPY_VER:-8.5.2}"
 # bootstrap.sh - instala TODO lo necesario desde cero en un sandbox nuevo.
 # Uso:  bash tools/bootstrap.sh
 # Idempotente: si algo ya esta instalado, lo salta.
@@ -58,13 +61,13 @@ ls /opt/android-sdk/build-tools /opt/android-sdk/platforms
 
 # ---------------------------------------------------------- 4. Ren'Py SDK
 say "Ren'Py SDK 8.3.7"
-if [ ! -x "$TOOLS/renpy-8.3.7/renpy.sh" ]; then
+if [ ! -x "$TOOLS/renpy-${RENPY_VER}/renpy.sh" ]; then
   mkdir -p "$TOOLS" && cd "$TOOLS"
-  curl -sL -o renpy-sdk.tar.bz2 "https://www.renpy.org/dl/8.3.7/renpy-8.3.7-sdk.tar.bz2"
-  mkdir -p "$TOOLS/renpy-8.3.7"
-  tar xjf renpy-sdk.tar.bz2 -C "$TOOLS/renpy-8.3.7" --strip-components=1
+  curl -sL -o renpy-sdk.tar.bz2 "https://www.renpy.org/dl/${RENPY_VER}/renpy-${RENPY_VER}-sdk.tar.bz2"
+  mkdir -p "$TOOLS/renpy-${RENPY_VER}"
+  tar xjf renpy-sdk.tar.bz2 -C "$TOOLS/renpy-${RENPY_VER}" --strip-components=1
 fi
-ls "$TOOLS/renpy-8.3.7/renpy.sh"
+ls "$TOOLS/renpy-${RENPY_VER}/renpy.sh"
 
 # ------------------------------------------------------------ 5. unrpyc
 say "unrpyc (descompilador de .rpyc)"
